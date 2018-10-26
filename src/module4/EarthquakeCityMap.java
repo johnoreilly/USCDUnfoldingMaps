@@ -81,11 +81,11 @@ public class EarthquakeCityMap extends PApplet {
 		
 		// FOR TESTING: Set earthquakesURL to be one of the testing files by uncommenting
 		// one of the lines below.  This will work whether you are online or offline
-		earthquakesURL = "test1.atom";
+		//earthquakesURL = "test1.atom";
 		//earthquakesURL = "test2.atom";
 		
 		// WHEN TAKING THIS QUIZ: Uncomment the next line
-		//earthquakesURL = "quiz1.atom";
+		earthquakesURL = "quiz1.atom";
 		
 		
 		// (2) Reading in earthquake data and geometric properties
@@ -246,9 +246,9 @@ public class EarthquakeCityMap extends PApplet {
 						qCount++;
 					}
 				}
-				if (qm instanceof OceanQuakeMarker) {
+/*				if (qm instanceof OceanQuakeMarker) {
 					oCount++;
-				}
+				}*/
 			}
 			if(qCount>0)System.out.println("something" + theCountry +" " + qCount);
 			// String name = (String)qm.getProperty("name");
@@ -256,8 +256,12 @@ public class EarthquakeCityMap extends PApplet {
 			// EarthquakeMarker em = (EarthquakeMarker)cm;
 			// if(em.isOnLand())System.out.println("landho");
 		}
+		for (Marker qm : quakeMarkers) {
+			if (qm instanceof OceanQuakeMarker) {
+				oCount++;
+			}
+		}
 		if(oCount>0)System.out.println("ocean quaked "+ oCount);
-
 	}
 	
 	
