@@ -46,7 +46,7 @@ public class CityMarker extends SimplePointMarker {
 		// whose upper left corner is at position x, y
 		// Check out the processing documentation for more methods
 		
-		System.out.println("hohho " + this.getLocation());
+		//System.out.println("hohho " + this.getLocation());
 		float r=this.radius;
 		float lat = (float) this.getLocation().x;
 		float lon = (float)this.getLocation().y;

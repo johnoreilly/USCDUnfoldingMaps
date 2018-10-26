@@ -256,7 +256,7 @@ public class EarthquakeCityMap extends PApplet {
 			// EarthquakeMarker em = (EarthquakeMarker)cm;
 			// if(em.isOnLand())System.out.println("landho");
 		}
-		//if(oCount>0)System.out.println("ocean quaked "+ oCount);
+		if(oCount>0)System.out.println("ocean quaked "+ oCount);
 
 	}
 	
