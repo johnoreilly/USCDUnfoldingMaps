@@ -146,6 +146,23 @@ public class EarthquakeCityMap extends PApplet {
 	private void selectMarkerIfHover(List<Marker> markers)
 	{
 		// TODO: Implement this method
+		
+	for(Marker m : cityMarkers) {
+			m.setHidden(true);
+		}
+		
+			  Marker marker = map.getFirstHitMarker(mouseX, mouseY);
+			  if (marker != null) {
+			    println(marker.getStringProperty("name"));
+			    marker.setHidden(false);
+			  }else {
+				 // marker.setHidden(true);
+			  }
+			
+/*		for(Marker m:markers) {
+			if(m.isInside(arg0, arg1, arg2))
+			System.out.println("Mousex : " + mouseX +  " --- Mousey : " + mouseY);
+		}*/
 	}
 	
 	/** The event handler for mouse clicks
