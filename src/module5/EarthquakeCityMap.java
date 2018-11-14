@@ -120,7 +120,8 @@ public class EarthquakeCityMap extends PApplet {
 		background(0);
 		map.draw();
 		addKey();
-		unhideMarkers();
+		if(!(lastClicked==null))unhideMarkers();
+		
 		
 	}
 	
@@ -171,6 +172,21 @@ public class EarthquakeCityMap extends PApplet {
 		}
 	}
 	
+	public void selectMarkerIfClicked(List<Marker> markers) {
+		deSelectMarkers(markers);
+		lastClicked=null;
+		
+		for (Marker marker: markers){
+			if (marker.isInside(map, mouseX, mouseY)) {
+				marker.setSelected(true);
+				lastClicked= (CommonMarker)marker;
+				break;
+			}
+		}
+		hideAllNotSelected();
+		
+	}
+	
 	/** The event handler for mouse clicks
 	 * It will display an earthquake and its threat circle of cities
 	 * Or if a city is clicked, it will display all the earthquakes 
@@ -182,11 +198,30 @@ public class EarthquakeCityMap extends PApplet {
 		// TODO: Implement this method
 		// Hint: You probably want a helper method or two to keep this code
 		// from getting too long/disorganized
+		selectMarkerIfClicked(cityMarkers);
+	}
+	
+	// loop over and hide all markers
+	private void hideAllNotSelected() {		
+		for(Marker marker : quakeMarkers) {
+			marker.setHidden(true);
+		}
+			
+		for(Marker marker : cityMarkers) {
+			marker.setHidden(true);
+		}
+		for(Marker marker : cityMarkers) {
+			//if(marker.isSelected())marker.setHidden(false);
+		}
+		for(Marker marker : quakeMarkers) {
+			//if(marker.isSelected())marker.setHidden(false);
+		}
 	}
 	
 	
 	// loop over and unhide all markers
 	private void unhideMarkers() {
+		
 		for(Marker marker : quakeMarkers) {
 			marker.setHidden(false);
 		}
