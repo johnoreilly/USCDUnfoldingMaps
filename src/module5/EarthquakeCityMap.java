@@ -120,6 +120,7 @@ public class EarthquakeCityMap extends PApplet {
 		background(0);
 		map.draw();
 		addKey();
+		unhideMarkers();
 		
 	}
 	
@@ -130,13 +131,26 @@ public class EarthquakeCityMap extends PApplet {
 	public void mouseMoved()
 	{
 		// clear the last selection
-		if (lastSelected != null) {
+/*		if (lastSelected != null) {
 			lastSelected.setSelected(false);
 			lastSelected = null;
 		
-		}
+		}*/
+		deSelectMarkers(quakeMarkers);		
+		deSelectMarkers(cityMarkers);
+		
 		selectMarkerIfHover(quakeMarkers);
 		selectMarkerIfHover(cityMarkers);
+	}
+	
+	private void deSelectMarkers(List<Marker> markers)
+	{
+		// TODO: Implement this method
+
+		// Select the marker and call it's setSelected() method with first argument as true 
+		for (Marker marker: markers){
+			marker.setSelected(false);
+		}
 	}
 	
 	// If there is a marker under the cursor, and lastSelected is null 
@@ -147,36 +161,14 @@ public class EarthquakeCityMap extends PApplet {
 	{
 		// TODO: Implement this method
 
-		for(Marker m : cityMarkers) {
-			m.setSelected(false);
-/*			if(!m.isSelected()) {
-				m.setHidden(false);
-				m.setSelected(false);
-			}*/
+		// Select the marker and call it's setSelected() method with first argument as true 
+		for (Marker marker: markers){
+			if (marker.isInside(map, mouseX, mouseY)) {
+				marker.setSelected(true);
+				//lastSelected = (CommonMarker)marker;
+				break;
+			}
 		}
-
-		Marker marker = map.getFirstHitMarker(mouseX, mouseY);
-		if (marker != null) {
-			//println(marker.getStringProperty("name"));
-			//marker.setHidden(false);
-			marker.setSelected(true);
-		}else {
-			// marker.setHidden(true);
-		}
-
-		for(Marker m : cityMarkers) {
-			if(m.isSelected())System.out.println("Selected : " +m.getStringProperty("name"));
-		}
-		
-		for(Marker m : cityMarkers) {
-			m.setSelected(false);
-		}
-		
-
-		/*		for(Marker m:markers) {
-			if(m.isInside(arg0, arg1, arg2))
-			System.out.println("Mousex : " + mouseX +  " --- Mousey : " + mouseY);
-		}*/
 	}
 	
 	/** The event handler for mouse clicks

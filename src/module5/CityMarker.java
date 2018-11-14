@@ -36,22 +36,42 @@ public class CityMarker extends CommonMarker {
 	 * Implementation of method to draw marker on the map.
 	 */
 	public void draw(PGraphics pg, float x, float y) {
-		// Save previous drawing style
-		pg.pushStyle();
-		if(! this.hidden) {
-		// IMPLEMENT: drawing triangle for each city
-		pg.fill(150, 30, 30);
-		pg.triangle(x, y-TRI_SIZE, x-TRI_SIZE, y+TRI_SIZE, x+TRI_SIZE, y+TRI_SIZE);
+		//drawMarker(pg,x,y);
+		if (!hidden) {
+			drawMarker(pg, x, y);
+			if (selected) {
+				showTitle(pg, x, y);  // You will implement this in the subclasses
+			}
 		}
-		// Restore previous drawing style
-		pg.popStyle();
 	}
 	
 	/** Show the title of the city if this marker is selected */
 	public void showTitle(PGraphics pg, float x, float y)
 	{
 		
-		// TODO: Implement this method
+
+			
+		int yellow = pg.color(255, 255, 1);
+		int black = pg.color(0, 0, 0);
+		
+		int fontSize = 12;
+		
+		String text = String.format("City: %s, Country: %s, Population: %.2f Million",
+				getCity(), getCountry(), getPopulation());
+		float textWidth = pg.textWidth(text);
+		
+		
+		// draw popup box
+		pg.fill(yellow);
+		pg.rect(x + TRI_SIZE, (y + TRI_SIZE) - fontSize, textWidth + 2, 14);
+
+		// draw text
+		pg.fill(black);
+		pg.stroke(black);
+		pg.textSize(fontSize);
+		pg.text(text, x + TRI_SIZE, y + TRI_SIZE);
+
+
 	}
 	
 	
@@ -77,6 +97,18 @@ public class CityMarker extends CommonMarker {
 	@Override
 	public void drawMarker(PGraphics pg, float x, float y) {
 		// TODO Auto-generated method stub
-		
+
+			// Save previous drawing style
+			pg.pushStyle();
+			
+			// IMPLEMENT: drawing triangle for each city
+			pg.fill(150, 30, 30);
+			pg.triangle(x, y-TRI_SIZE, x-TRI_SIZE, y+TRI_SIZE, x+TRI_SIZE, y+TRI_SIZE);
+			
+			// Restore previous drawing style
+			pg.popStyle();
+				
 	}
+	
+
 }
