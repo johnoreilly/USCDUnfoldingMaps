@@ -199,6 +199,7 @@ public class EarthquakeCityMap extends PApplet {
 		// Hint: You probably want a helper method or two to keep this code
 		// from getting too long/disorganized
 		selectMarkerIfClicked(cityMarkers);
+		hideAllNotSelected();
 	}
 	
 	// loop over and hide all markers
