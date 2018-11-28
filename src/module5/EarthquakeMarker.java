@@ -1,7 +1,11 @@
 package module5;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import de.fhpotsdam.unfolding.data.PointFeature;
 import processing.core.PGraphics;
+import de.fhpotsdam.unfolding.marker.Marker;
 
 /** Implements a visual marker for earthquakes on an earthquake map
  * 
@@ -34,6 +38,8 @@ public abstract class EarthquakeMarker extends CommonMarker
 	public static final float THRESHOLD_INTERMEDIATE = 70;
 	/** Greater than or equal to this threshold is a deep depth */
 	public static final float THRESHOLD_DEEP = 300;
+	
+	List<Marker> cityInDangerMarkers;
 
 	// ADD constants for colors if you want
 
@@ -128,6 +134,27 @@ public abstract class EarthquakeMarker extends CommonMarker
 		return km;
 	}
 	
+	
+	public void showDanger(List<Marker> quakeMarkers,List<Marker>cityMarkers){
+		hideOtherQuakes(quakeMarkers);
+		listDangerCities(cityMarkers):
+	}
+	
+	public void listDangerCities(List<Marker> cityMarkers) {
+		if(cityInDangerMarkers==null)cityInDangerMarkers= new ArrayList<Marker>();
+		for(Marker city : cityMarkers) 
+			if(city.getDistanceTo(this.getLocation())>threatCircle()) {
+				 city.setHidden(true);
+		}else {
+			if(!cityInDangerMarkers.contains(city))cityInDangerMarkers.add(city);
+		}
+	}
+	
+	public void hideOtherQuakes(List<Marker>markers) {
+		for(Marker marker : markers) {
+			if(marker!=this)marker.setHidden(true);
+		}
+	}
 	// determine color of marker from depth
 	// We use: Deep = red, intermediate = blue, shallow = yellow
 	private void colorDetermine(PGraphics pg) {

@@ -173,18 +173,10 @@ public class EarthquakeCityMap extends PApplet {
 	}
 	
 	public void selectMarkerIfClicked(List<Marker> markers) {
-		deSelectMarkers(markers);
-		lastClicked=null;
+		//deSelectMarkers(markers);
+		//lastClicked=null;
 		
-		for (Marker marker: markers){
-			if (marker.isInside(map, mouseX, mouseY)) {
-				marker.setSelected(true);
-				lastClicked= (CommonMarker)marker;
-				break;
-			}
-		}
-		hideAllNotSelected();
-		
+
 	}
 	
 	/** The event handler for mouse clicks
@@ -198,25 +190,48 @@ public class EarthquakeCityMap extends PApplet {
 		// TODO: Implement this method
 		// Hint: You probably want a helper method or two to keep this code
 		// from getting too long/disorganized
-		selectMarkerIfClicked(cityMarkers);
+		for (Marker marker: markers){
+			if (marker.isInside(map, mouseX, mouseY)) {
+				marker.setSelected(true);
+				lastClicked= (CommonMarker)marker;
+				break;
+			}
+		}
 		hideAllNotSelected();
+		if(clickMeClicked(quakeMarkers,mouseX,mouseY) hideNotClicked();
+		//selectMarkerIfClicked(quakeMarkers);
+		//hideAllNotSelected(cityMarkers);
+	}
+	
+	public void hideNotClicked() {
+		lastClicked.showDanger(quakeMarkers,cityMarkers);
+	}
+	
+	public boolean clickMeClicked(List<Marker> markers, float x,float y) {
+		for(Marker marker : markers) {
+			if( marker.isInside(map, x, y)) {
+				lastClicked=(CommonMarker)marker;
+				lastClicked.setSelected(true);
+				return true
+			}
+		}
+		return false;
 	}
 	
 	// loop over and hide all markers
-	private void hideAllNotSelected() {		
-		for(Marker marker : quakeMarkers) {
+	private void hideAllNotSelected() {	
+		
+/*		for(Marker marker : quakeMarkers) {
 			marker.setHidden(true);
 		}
-			
+		
 		for(Marker marker : cityMarkers) {
-			marker.setHidden(true);
-		}
-		for(Marker marker : cityMarkers) {
-			//if(marker.isSelected())marker.setHidden(false);
-		}
+			if(marker.isSelected())marker.setHidden(false);
+		}*/
+		/*
 		for(Marker marker : quakeMarkers) {
 			//if(marker.isSelected())marker.setHidden(false);
-		}
+		}*/
 	}
 	
 	
