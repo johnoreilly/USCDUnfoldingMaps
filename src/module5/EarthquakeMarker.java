@@ -64,6 +64,7 @@ public abstract class EarthquakeMarker extends CommonMarker
 	// calls abstract method drawEarthquake and then checks age and draws X if needed
 	@Override
 	public void drawMarker(PGraphics pg, float x, float y) {
+		if(!hidden) {
 		// save previous styling
 		pg.pushStyle();
 			
@@ -92,6 +93,7 @@ public abstract class EarthquakeMarker extends CommonMarker
 		
 		// reset to previous styling
 		pg.popStyle();
+		}
 		
 	}
 
@@ -137,7 +139,7 @@ public abstract class EarthquakeMarker extends CommonMarker
 	
 	public void showDanger(List<Marker> quakeMarkers,List<Marker>cityMarkers){
 		hideOtherQuakes(quakeMarkers);
-		listDangerCities(cityMarkers):
+		listDangerCities(cityMarkers);
 	}
 	
 	public void listDangerCities(List<Marker> cityMarkers) {
@@ -150,11 +152,19 @@ public abstract class EarthquakeMarker extends CommonMarker
 		}
 	}
 	
-	public void hideOtherQuakes(List<Marker>markers) {
+	private void hideOtherQuakes(List<Marker> quakeMarkers){
+		for (Marker marker: quakeMarkers){
+			//if (marker != this){
+				marker.setHidden(true);
+		//	}
+		}
+	}
+	
+/*	public void hideOtherQuakes(List<Marker>markers) {
 		for(Marker marker : markers) {
 			if(marker!=this)marker.setHidden(true);
 		}
-	}
+	}*/
 	// determine color of marker from depth
 	// We use: Deep = red, intermediate = blue, shallow = yellow
 	private void colorDetermine(PGraphics pg) {

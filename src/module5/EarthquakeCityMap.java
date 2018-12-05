@@ -120,7 +120,7 @@ public class EarthquakeCityMap extends PApplet {
 		background(0);
 		map.draw();
 		addKey();
-		if(!(lastClicked==null))unhideMarkers();
+		//if(!(lastClicked==null))unhideMarkers();
 		
 		
 	}
@@ -190,15 +190,17 @@ public class EarthquakeCityMap extends PApplet {
 		// TODO: Implement this method
 		// Hint: You probably want a helper method or two to keep this code
 		// from getting too long/disorganized
-		for (Marker marker: markers){
-			if (marker.isInside(map, mouseX, mouseY)) {
-				marker.setSelected(true);
-				lastClicked= (CommonMarker)marker;
-				break;
-			}
+		float x=mouseX;
+		float y=mouseY;
+		if (lastClicked != null) {
+			lastClicked.setClicked(false);
+			lastClicked = null;
+			unhideMarkers();
 		}
-		hideAllNotSelected();
-		if(clickMeClicked(quakeMarkers,mouseX,mouseY) hideNotClicked();
+		//hideAllNotSelected();
+		if(clickMeClicked(quakeMarkers,x,y)||clickMeClicked(cityMarkers, x, y)){
+			hideNotClicked();
+		}
 		//selectMarkerIfClicked(quakeMarkers);
 		//hideAllNotSelected(cityMarkers);
 	}
@@ -212,11 +214,13 @@ public class EarthquakeCityMap extends PApplet {
 			if( marker.isInside(map, x, y)) {
 				lastClicked=(CommonMarker)marker;
 				lastClicked.setSelected(true);
-				return true
+				return true;
 			}
 		}
 		return false;
 	}
+	
+
 	
 	// loop over and hide all markers
 	private void hideAllNotSelected() {	

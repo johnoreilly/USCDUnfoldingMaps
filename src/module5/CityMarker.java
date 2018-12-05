@@ -1,8 +1,11 @@
 package module5;
 
+import java.util.List;
+
 import de.fhpotsdam.unfolding.data.Feature;
 import de.fhpotsdam.unfolding.data.PointFeature;
 import de.fhpotsdam.unfolding.geo.Location;
+import de.fhpotsdam.unfolding.marker.Marker;
 import de.fhpotsdam.unfolding.marker.SimplePointMarker;
 import processing.core.PConstants;
 import processing.core.PGraphics;
@@ -73,6 +76,27 @@ public class CityMarker extends CommonMarker {
 
 
 	}
+public void showDanger(List<Marker> quakeMarkers, List<Marker> cityMarkers) {
+	// Hiding all the cities except this
+	for (Marker cityMarker: cityMarkers){
+		if (!this.equals(cityMarker)){
+			cityMarker.setHidden(true);
+		}else {
+			//System.out.println("city : " + cityMarker.getStringProperty("name"));
+			//System.out.println("this is : " + this.getStringProperty("name"));
+			cityMarker.setHidden(false);
+		}
+	}
+	
+	// Hide the earthquakes which don't effect this cityMarker
+
+	for (Marker earthquakeMarker: quakeMarkers){
+		double threat = ((EarthquakeMarker) earthquakeMarker).threatCircle();
+		if (earthquakeMarker.getDistanceTo(this.getLocation()) > threat){
+			earthquakeMarker.setHidden(true);
+		}
+	}
+}
 	
 	
 	
