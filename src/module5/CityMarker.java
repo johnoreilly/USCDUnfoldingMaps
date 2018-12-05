@@ -92,7 +92,7 @@ public void showDanger(List<Marker> quakeMarkers, List<Marker> cityMarkers) {
 
 	for (Marker earthquakeMarker: quakeMarkers){
 		double threat = ((EarthquakeMarker) earthquakeMarker).threatCircle();
-		if (earthquakeMarker.getDistanceTo(this.getLocation()) > threat){
+		if (earthquakeMarker.getDistanceTo(this.getLocation()) > threat*2){
 			earthquakeMarker.setHidden(true);
 		}
 	}
