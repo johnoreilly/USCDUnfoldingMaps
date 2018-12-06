@@ -147,8 +147,6 @@ public class EarthquakeCityMap extends PApplet {
 	private void deSelectMarkers(List<Marker> markers)
 	{
 		// TODO: Implement this method
-
-		// Select the marker and call it's setSelected() method with first argument as true 
 		for (Marker marker: markers){
 			marker.setSelected(false);
 		}
@@ -161,8 +159,6 @@ public class EarthquakeCityMap extends PApplet {
 	private void selectMarkerIfHover(List<Marker> markers)
 	{
 		// TODO: Implement this method
-
-		// Select the marker and call it's setSelected() method with first argument as true 
 		for (Marker marker: markers){
 			if (marker.isInside(map, mouseX, mouseY)) {
 				marker.setSelected(true);
@@ -175,8 +171,6 @@ public class EarthquakeCityMap extends PApplet {
 	public void selectMarkerIfClicked(List<Marker> markers) {
 		//deSelectMarkers(markers);
 		//lastClicked=null;
-		
-
 	}
 	
 	/** The event handler for mouse clicks
@@ -367,14 +361,13 @@ public class EarthquakeCityMap extends PApplet {
 		// getting location of feature
 		Location checkLoc = earthquake.getLocation();
 
-		// some countries represented it as MultiMarker
-		// looping over SimplePolygonMarkers which make them up to use isInsideByLoc
+		//cast to MultiMarker to use isInsideByLocation()
 		if(country.getClass() == MultiMarker.class) {
 				
 			// looping over markers making up MultiMarker
 			for(Marker marker : ((MultiMarker)country).getMarkers()) {
 					
-				// checking if inside
+				// if inside
 				if(((AbstractShapeMarker)marker).isInsideByLocation(checkLoc)) {
 					earthquake.addProperty("country", country.getProperty("name"));
 						

@@ -65,15 +65,9 @@ public abstract class EarthquakeMarker extends CommonMarker
 	@Override
 	public void drawMarker(PGraphics pg, float x, float y) {
 		if(!hidden) {
-		// save previous styling
 		pg.pushStyle();
-			
-		// determine color of marker from depth
-		colorDetermine(pg);
-		
-		// call abstract method implemented in child class to draw marker shape
+		colorDetermine(pg);		
 		drawEarthquake(pg, x, y);
-		
 		// IMPLEMENT: add X over marker if within past day		
 		String age = getStringProperty("age");
 		if ("Past Hour".equals(age) || "Past Day".equals(age)) {
@@ -90,8 +84,7 @@ public abstract class EarthquakeMarker extends CommonMarker
 					y-(radius+buffer));
 			
 		}
-		
-		// reset to previous styling
+
 		pg.popStyle();
 		}
 		
@@ -101,19 +94,13 @@ public abstract class EarthquakeMarker extends CommonMarker
 	@Override
 	public void showTitle(PGraphics pg, float x, float y)
 	{
-		
-		
-
 		int yellow = pg.color(255, 255, 1);
-		int black = pg.color(0, 0, 0);
-		
+		int black = pg.color(0, 0, 0);	
 		String title = getTitle();
-		int fontSize = 12;
-		
+		int fontSize = 12;		
 		// draw popup box
 		pg.fill(yellow);
-		pg.rect(x, (y + getRadius() * 2) - (fontSize), pg.textWidth(title), fontSize + 2);
-		
+		pg.rect(x, (y + getRadius() * 2) - (fontSize), pg.textWidth(title), fontSize + 2);	
 		// draw  title
 		pg.fill(black);
 		pg.textSize(fontSize);
