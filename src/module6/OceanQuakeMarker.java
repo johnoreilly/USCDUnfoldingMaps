@@ -10,6 +10,7 @@ import processing.core.PGraphics;
  */
 public class OceanQuakeMarker extends EarthquakeMarker {
 	
+	
 	public OceanQuakeMarker(PointFeature quake) {
 		super(quake);
 		
@@ -27,6 +28,13 @@ public class OceanQuakeMarker extends EarthquakeMarker {
 		// HINT: Notice the radius variable in the EarthquakeMarker class
 		// and how it is set in the EarthquakeMarker constructor
 		pg.rect(x-radius, y-radius, 2*radius, 2*radius);
+	}
+
+
+	@Override
+	public int compareTo(EarthquakeMarker arg0) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 

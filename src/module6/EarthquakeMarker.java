@@ -10,7 +10,7 @@ import processing.core.PGraphics;
  *
  */
 // TODO: Implement the comparable interface
-public abstract class EarthquakeMarker extends CommonMarker
+public abstract class EarthquakeMarker extends CommonMarker implements Comparable<EarthquakeMarker>
 {
 	
 	// Did the earthquake occur on land?  This will be set by the subclasses.
@@ -142,6 +142,11 @@ public abstract class EarthquakeMarker extends CommonMarker
 		else {
 			pg.fill(255, 0, 0);
 		}
+	}
+	
+	public int compareTo(EarthquakeMarker o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	
